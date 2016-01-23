@@ -24,7 +24,8 @@ class ApplicationController < ActionController::Base
   		cart = Cart.create
   	end
 
-  	session[:cart_id] = cart.id
+    #re-call session to extend the session lifetime
+  	session[:cart_id] = cart.id 
   	cart
   end
 

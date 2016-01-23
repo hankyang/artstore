@@ -38,7 +38,7 @@
 
     <div class="order-form">
 
-      <%= simple_form_for @order do |f| %>
+      <%= simple_form_for @order do |f| %> <!-- #nested_form 卡關003 -->
 
         <%= f.simple_fields_for :info do |c| %>
 

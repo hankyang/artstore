@@ -2,9 +2,12 @@ class Order < ActiveRecord::Base
 
 	belongs_to :user
 
+	# "class_name" 可針對"has_many" 或 "has_one"去將型態指定至特定的class 裡
+	#（這裡是"Order"，可以改成其他的）
 	has_many :items, class_name: "OrderItem", dependent: :destroy
 	has_one  :info,  class_name: "OrderInfo", dependent: :destroy
 
+	#nested_form 卡關001
 	accepts_nested_attributes_for :info
 
 	include AASM
@@ -50,7 +53,7 @@ class Order < ActiveRecord::Base
 		cart.items.each do |cart_item|
 			item = items.build
 			item.product_name = cart_item.title
-			item.quantity = 1 
+			item.quantity = cart.find_cart_item(cart_item).quantity 
 			item.price = cart_item.price
 			item.save
 		end

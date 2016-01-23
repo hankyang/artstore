@@ -18,6 +18,7 @@ module ApplicationHelper
 	end
 
 	def render_cart_items_count(cart)
+		#call for "count" or "size" will trigger "counter cache" to memberize the number of items (or db)
 		cart.cart_items.count
 	end
 end
