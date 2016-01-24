@@ -78,7 +78,11 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.after_initialize do 
-    Pay2go.integration_mode = :production
+    #Pay2go.integration_mode = :production
+    Pay2go.integration_mode = :development
   end
+
+  # https://sleepy-fjord-12874.herokuapp.com/
+  config.action_mailer.default_url_options = { host: "https://sleepy-fjord-12874.herokuapp.com/" } 
 
 end

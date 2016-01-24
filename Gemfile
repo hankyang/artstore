@@ -1,5 +1,6 @@
 source 'https://rubygems.org'
 
+gem "figaro"
 gem "pay2go"
 gem "letter_opener", group: :development
 gem "roadie", "2.4.3"
