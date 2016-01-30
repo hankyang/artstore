@@ -9,7 +9,7 @@ class Cart < ActiveRecord::Base
 	def add_product_to_cart(product)
 		# "<<" 就是 "push"
 		items << product
-#		ci = cart.cart_items.build
+#		ci = cart_items.build
 #		ci.product = product
 #		ci.save
 	end
