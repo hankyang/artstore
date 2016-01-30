@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
-	before_action :authenticate_user!, except: :pay2go_cc_notify
+	before_action :authenticate_user!, except: [:pay2go_cc_notify, :pay2go_atm_notify]
 
-	protect_from_forgery expect: :pay2go_cc_notify
+	protect_from_forgery expect: [:pay2go_cc_notify, :pay2go_atm_notify]
 
 	def show
 		@order = Order.find(params[:id])
@@ -48,6 +48,23 @@ class OrdersController < ApplicationController
 			else
 				render text: "信用卡失敗"
 			end
+		else
+			render text:"交易失敗"
+		end
+	end
+
+	def pay2go_atm_notify
+		@order = Order.find_by_token(params[:id])
+
+		json_data = JSON.parse(params["JSONData"])
+
+		if json_data["Status"] == "SUCCESS"
+
+			@order.set_payment_with!("atm")
+			@order.make_payment!
+
+			flash[:notice] = "以ＡＴＭ付帳成功"
+			redirect_to account_orders_path
 		else
 			render text:"交易失敗"
 		end
