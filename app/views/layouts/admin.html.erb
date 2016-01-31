@@ -3,10 +3,16 @@
 <head>
   <title>Artstore 後台</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  
   <%= csrf_meta_tags %>
 </head>
 <body>
+<%= content_for :handwrite_javascript do %> 
+  <script>
+    $("button.continue").html("Next Step...")
+  </script>
+<% end %>
+
   <div class="container">
     <%= render "common/navbar" %>
     <%= notice_message %>
@@ -24,5 +30,8 @@
       </div>
     </div>
   </div>
+
+<%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+<%= yield :handwrite_javascript %>  
 </body>
 </html>
