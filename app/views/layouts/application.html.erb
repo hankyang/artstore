@@ -8,19 +8,11 @@
 </head>
 <body>
 
-<%= content_for :handwrite_javascript do %>	
-<script>
-	//$("button.continue").html( "Next Step..." ); 
-</script>
-<% end %>
-
 <div class="container">
 	<%= render "common/navbar"%>
 	<%= notice_message %>
 	<%= yield %>
 </div>
 
-
-<%= yield :handwrite_javascript %>
 </body>
 </html>
