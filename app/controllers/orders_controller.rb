@@ -63,10 +63,9 @@ class OrdersController < ApplicationController
 			@order.set_payment_with!("atm")
 			@order.make_payment!
 
-			flash[:notice] = "以ＡＴＭ付帳成功"
-			redirect_to account_orders_path
+			render text: "交易成功"
 		else
-			render text:"交易失敗"
+			render text: "交易失敗"
 		end
 	end
 
