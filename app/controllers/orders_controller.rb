@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
-	before_action :authenticate_user!, except: [:pay2go_cc_notify, :pay2go_atm_notify]
+	before_action :authenticate_user!, except: [:pay2go_cc_notify, :pay2go_atm_complete]
 
-	protect_from_forgery expect: [:pay2go_cc_notify, :pay2go_atm_notify]
+	protect_from_forgery expect: [:pay2go_cc_notify, :pay2go_atm_complete]
 
 	def show
 		@order = Order.find(params[:id])
@@ -53,7 +53,7 @@ class OrdersController < ApplicationController
 		end
 	end
 
-	def pay2go_atm_notify
+	def pay2go_atm_complete
 		@order = Order.find_by_token(params[:id])
 
 		json_data = JSON.parse(params["JSONData"])
